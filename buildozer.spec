@@ -21,6 +21,7 @@ android.ndk = 25b
 android.build_tools_version = 33.0.0
 
 p4a.bootstrap = sdl2
+p4a.branch = develop
 android.format = apk
 
 [buildozer]
