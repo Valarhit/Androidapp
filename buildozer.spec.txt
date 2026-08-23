@@ -60,36 +60,30 @@ android.min_api = 21
 # directory containing the files)
 #android.add_src =
 
-name: Build APK
+# (list) List of custom Gradle dependencies to add
+#android.gradle_dependencies =
 
-on:
-  push:
-    branches: [ main ]
+# (bool) Enable AndroidX support
+android.enable_androidx = True
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# (str) The format used to package the app for release ('aab' or 'apk')
+android.package_format = apk
 
-    steps:
-    - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+[buildozer]
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libstdc++6 patchelf libffi-dev libssl-dev
-        pip install --upgrade pip buildozer cython==0.29.36 virtualenv
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
 
-    - name: Build with Buildozer and Auto-accept Licenses
-      run: |
-        yes | buildozer android debug || buildozer android debug
+# (int) Display warning if buildozer is run as root (0 = False, 1 = 1)
+warn_on_root = 1
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: package
-        path: bin/*.apk
+# (str) Path to build artifact, default is .
+#bin_dir = ./bin
+
+# (str) Path to build directory (default is .buildozer)
+#build_dir = .buildozer
+
+# (str) Direction to storage
+#android.sdk_path = ~/.android/sdk
+#android.ndk_path = ~/.android/ndk
