@@ -41,17 +41,16 @@ jobs:
           unzip \
           ant
 
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '11'
+
     - name: Install Buildozer and Cython
       run: |
         pip install --upgrade pip
         pip install --upgrade cython==0.29.36 buildozer
-
-    - name: Pre-install Android SDK and Accept Licenses
-      run: |
-        export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-        mkdir -p $ANDROID_HOME
-        sdkmanager --sdk_root=$ANDROID_HOME --install "platforms;android-33" "build-tools;33.0.0" "platform-tools" || true
-        yes | sdkmanager --sdk_root=$ANDROID_HOME --licenses || true
 
     - name: Build with Buildozer
       run: |
@@ -61,4 +60,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: package
+        path: bin/*.apk
         path: bin/*.apk
