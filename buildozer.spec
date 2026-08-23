@@ -51,7 +51,13 @@ android.minapi = 21
 # (str) Android NDK version to use
 android.ndk = 25b
 
-# (str) Bootstrap to use for android builds (updated parameter name)
+# (str) Android SDK version to use
+android.sdk = 33
+
+# (str) Android build tools version to use
+android.build_tools_version = 33.0.0
+
+# (str) Bootstrap to use for android builds
 p4a.bootstrap = sdl2
 
 # (str) The format used to package the app for release/debug (aab or apk)
