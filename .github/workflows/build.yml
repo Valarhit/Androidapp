@@ -57,19 +57,16 @@ jobs:
         export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
         mkdir -p $ANDROID_HOME/cmdline-tools
         
-        # Скачиваем командные инструменты SDK
         wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O /tmp/cmdtools.zip
         unzip -q /tmp/cmdtools.zip -d /tmp/
         rm -rf $ANDROID_HOME/cmdline-tools/latest
         mv /tmp/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
 
-        # Создаем симлинк, чтобы python-for-android нашел sdkmanager по старому пути
         mkdir -p $ANDROID_HOME/tools/bin
         ln -sf $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
 
         export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
-        # Принудительно принимаем все лицензии и ставим нужные компоненты
         yes | sdkmanager --licenses || true
         sdkmanager "platform-tools" "platforms;android-33" "build-tools;37.0.0" || true
         yes | sdkmanager --licenses || true
