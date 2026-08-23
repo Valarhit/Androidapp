@@ -46,7 +46,13 @@ jobs:
         pip install --upgrade pip
         pip install --upgrade cython==0.29.36 buildozer
 
-    - name: Accept Android SDK licenses and build
+    - name: Pre-install Android SDK components
+      run: |
+        export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
+        mkdir -p $ANDROID_HOME
+        yes | sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-33" "build-tools;33.0.0" "platform-tools" || true
+
+    - name: Build with Buildozer
       run: |
         buildozer -v android debug
 
