@@ -50,7 +50,8 @@ jobs:
     - name: Install Buildozer and Cython
       run: |
         python -m pip install --upgrade pip
-        pip install --upgrade cython==0.29.36 buildozer
+        pip install --upgrade cython==0.29.36
+        pip install git+https://github.com/kivy/buildozer.spec.git || pip install git+https://github.com/kivy/buildozer.git
 
     - name: Setup Android SDK, Licenses and Symlinks
       run: |
@@ -73,8 +74,7 @@ jobs:
 
     - name: Build with Buildozer
       run: |
-        # Очищаем старые артефакты сборки, чтобы исключить мусор
-        buildozer clean || true
+        export PYTHON=$(which python3)
         buildozer -v android debug
 
     - name: Upload APK
