@@ -61,4 +61,3 @@ jobs:
       with:
         name: package
         path: bin/*.apk
-        path: bin/*.apk
