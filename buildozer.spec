@@ -10,7 +10,7 @@ source.exclude_exts = spec
 source.exclude_dirs = tests, bin, venv
 source.exclude_patterns = license,images/*.jpg
 version = 0.1
-requirements = python3,kivy
+requirements = python3==3.10.11,kivy
 android.permissions = INTERNET
 orientation = portrait
 android.archs = arm64-v8a, armeabi-v7a
